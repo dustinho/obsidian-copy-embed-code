@@ -10,7 +10,7 @@ import { Menu, Notice, Plugin, TFile } from 'obsidian';
 export default class CopyEmbedUrlPlugin extends Plugin {
 	private lastClickedImage: { src: string; isExternal: boolean } | null = null;
 
-	async onload() {
+	onload() {
 		// Capture image info when user right-clicks (before menu appears)
 		this.registerDomEvent(document, 'contextmenu', (evt: MouseEvent) => {
 			this.captureImageInfo(evt);
