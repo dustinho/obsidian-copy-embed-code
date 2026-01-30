@@ -1,0 +1,9 @@
+{
+	"id": "copy-embed-url",
+	"name": "Copy Embed Code",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Adds a 'Copy Embed Code' option to right-click context menu for images. Works in Live Preview and Reading Mode, including nested embeds.",
+	"author": "dho",
+	"isDesktopOnly": false
+}
