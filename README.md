@@ -65,4 +65,4 @@ npm run build
 
 ## License
 
-0-BSD
+MIT
