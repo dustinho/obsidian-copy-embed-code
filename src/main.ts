@@ -73,7 +73,7 @@ export default class CopyEmbedUrlPlugin extends Plugin {
 
 		menu.addItem((item) => {
 			item
-				.setTitle('Copy Embed Code')
+				.setTitle('Copy embed code')
 				.setIcon('copy')
 				.onClick(() => this.copyEmbedCode(src, isExternal));
 		});
@@ -96,14 +96,45 @@ export default class CopyEmbedUrlPlugin extends Plugin {
 
 		const menuItem = document.createElement('div');
 		menuItem.className = 'menu-item';
-		menuItem.innerHTML = `
-			<div class="menu-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
-			<div class="menu-item-title">Copy Embed Code</div>
-		`;
+
+		// Build icon element
+		const iconDiv = document.createElement('div');
+		iconDiv.className = 'menu-item-icon';
+		const svgNS = 'http://www.w3.org/2000/svg';
+		const svg = document.createElementNS(svgNS, 'svg');
+		svg.setAttribute('width', '24');
+		svg.setAttribute('height', '24');
+		svg.setAttribute('viewBox', '0 0 24 24');
+		svg.setAttribute('fill', 'none');
+		svg.setAttribute('stroke', 'currentColor');
+		svg.setAttribute('stroke-width', '2');
+		svg.setAttribute('stroke-linecap', 'round');
+		svg.setAttribute('stroke-linejoin', 'round');
+		svg.classList.add('svg-icon', 'lucide-copy');
+		const rect = document.createElementNS(svgNS, 'rect');
+		rect.setAttribute('x', '9');
+		rect.setAttribute('y', '9');
+		rect.setAttribute('width', '13');
+		rect.setAttribute('height', '13');
+		rect.setAttribute('rx', '2');
+		rect.setAttribute('ry', '2');
+		const path = document.createElementNS(svgNS, 'path');
+		path.setAttribute('d', 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1');
+		svg.appendChild(rect);
+		svg.appendChild(path);
+		iconDiv.appendChild(svg);
+
+		// Build title element
+		const titleDiv = document.createElement('div');
+		titleDiv.className = 'menu-item-title';
+		titleDiv.textContent = 'Copy embed code';
+
+		menuItem.appendChild(iconDiv);
+		menuItem.appendChild(titleDiv);
 
 		menuItem.addEventListener('click', () => {
-			this.copyEmbedCode(src, isExternal);
-			(menuEl as HTMLElement).style.display = 'none';
+			void this.copyEmbedCode(src, isExternal);
+			(menuEl as HTMLElement).classList.add('is-hidden');
 		});
 
 		menuItem.addEventListener('mouseenter', () => menuItem.classList.add('selected'));
